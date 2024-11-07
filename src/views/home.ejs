@@ -1,0 +1,26 @@
+<script src="/scripts/Layout.modal.js"></script>
+<section class="">
+    <h2 class="issueInProjectHeading">Projects <%= allProjects? allProjects.length: 0 %> </h2>
+  
+    <div class="projectBoxes">
+        <% if(allProjects){ %>
+            <% allProjects.map((project) =>{ %>
+                <a href="/projects/<%= project.id %>" class="projectBox">
+
+                    <h2 class="projectHeaiding"><%= project.name %></h2>
+                    <p class="descriptionPara">
+                        <strong>Description:</strong>
+                        <span class="issueDetail"><%= project.description %></span>
+                    </p>
+                    <div class="bottomProjectBox">
+                        <p>Author: <strong><%= project.author %></strong><span id="authorName"></span></p>
+                        <time>Posted: <strong id="postTimeIssue"><%= project.postTime %></strong></time>
+                    </div>
+                </a>
+            <% }) %>
+         <% } %>
+           
+
+
+    </div>
+</section>

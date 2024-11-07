@@ -1,0 +1,154 @@
+<script src="/scripts/Layout.modal.js"></script>
+<section class="projectPageDIv">
+    <div class="topArea">
+        <% if(project){ %>
+            <div class="projectDiv">
+                <div class="issueProjectBoxHeading">
+                    <h2 class="projectHeaiding">
+                        <%= project.name%>
+                    </h2>
+                    <h2 class="issueCounterHedading">iSsue Consist: <span>
+                            <%= issues?issues.length:0 %>
+                        </span></h2>
+                </div>
+                <p>
+                    <%= project.description %>
+                </p>
+                <div class="bottomProjectBox">
+                    <p>Author: <strong>
+                            <%= project.author %>
+                        </strong><span id="authorName"></span></p>
+                    <time>Posted: <strong id="postTimeIssue">
+                            <%= project.postTime %>
+                        </strong></time>
+                </div>
+            </div>
+            <% } %>
+                <div class="issueListArea">
+                    <div class="topIssueButtonArea">
+                        <div class="topIssueButtonAreaTop">
+                            <h2>iSsues in the Project</h2>
+                            <button id="newIssueBtn">New Issue</button>
+                            <a href="/projects/delete/<%= projectId %>" id="deletProjectButton">Delete Project</a>
+                        </div>
+                        <div class="topIssueButtonAreaBottom">
+
+                            <!-- app.get('/projects/:id?', issueController.filterBasedOnErrorTypes) -->
+                            <a href="/projects/<%= projectId %>" id="clearAllFilter">Clear all filter</a>
+                            <button id="filterBtn">Filter</button>
+                            <!-- <button>search</button> -->
+                            <form id="searchForm" action="/projects/<%= projectId %>/search" method="post">
+
+                                <input type="text" name="projectId" id="projectId" value="<%= projectId %>" hidden>
+                                <input type="text" name="query" id="searchQuery" placeholder="Search...">
+                                <button type="submit">Search</button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="issueLists">
+
+                        <% if(issues){ %>
+                            <% issues.map((issue)=>{ %>
+                                <div class="issueBox">
+                                    <a href="/projects/<%= projectId %>/delete/<%= issue.id%>"
+                                        id="issueDeleteButton"><img src="/images/delete.png" alt=""></a>
+                                    <h2>
+                                        <%= issue.bugTitle %>
+                                    </h2>
+                                    <% if(issue.bugOption){ %>
+                                        <div class="errorInProjects">
+                                            <% { issue.bugOption.map((error)=>{ %>
+                                                <Label>
+                                                    <%= error %>
+                                                </Label>
+                                                <% })} %>
+                                        </div>
+                                        <% } %>
+                                            <p>
+                                                <%= issue.bugDescription %>
+                                            </p>
+                                            <div class="bottomIssueBox">
+                                                <div class="bottomIssueBoxLeft">
+                                                    <button id="resoleSolved">Resolve</button>
+                                                </div>
+                                                <div class="bottomIssueBoxRight">
+                                                    <p>Author: <strong>
+                                                            <%= issue.bugAuthor %>
+                                                        </strong><span id="authorName"></span></p>
+                                                    <time>Posted: <strong id="postTimeIssue">
+                                                            <%= issue.postTime %>
+                                                        </strong></time>
+                                                </div>
+                                            </div>
+                                </div>
+                                <% }) %>
+                                    <% } %>
+
+                    </div>
+                </div>
+
+    </div>
+    <div class="modal2" id="newProjectModal2">
+        <div class="modal-content2">
+            <span class="close2" id="closeModal2">&times;</span>
+            <h1 class="modelMainHeading">Create New Issue</h1>
+            <!-- Form for creating a new project -->
+            <form id="newProjectForm2" action="/newIssue" method="post">
+                <input type="text" name="projectId" id="projectId" value="<%= projectId %>" hidden>
+                <label for="bugTitle">iSsue</label>
+                <input type="text" name="bugTitle" id="bugTitle" placeholder="Bug Title" required>
+                <div class="bugTypesInputs">
+                    <label for="bugOption">Choose Bugs:</label>
+                    <select multiple size="4" name="bugOption" id="bugOption">
+                        <option value="FunctionalBugs">Functional Bugs</option>
+                        <option value="UIBugs">UI Bugs</option>
+                        <option value="BrowserCompatibilityBugs">Browser Compatibility Bugs</option>
+                        <option value="MobileResponsivenessBugs">Mobile Responsiveness Bugs</option>
+                        <option value="PerformanceIssues">Performance Issues</option>
+                        <option value="AccessibilityBugs">Accessibility Bugs</option>
+                        <option value="DataInputOutputErrors">Data Input/Output Errors</option>
+                        <option value="LoginAuthenticationIssues">Login/Authentication Issues</option>
+                        <option value="ErrorHandlingBugs">Error Handling Bugs</option>
+                        <option value="DocumentationDiscrepancies">Documentation Discrepancies</option>
+                    </select>
+
+                </div>
+                <label for="bugDescription">Enter Description</label>
+                <textarea name="bugDescription" id="bugDescription" cols="30" rows="5"
+                    placeholder="Enter Description Here" required></textarea>
+
+                <label for="bugAuthor">Name</label>
+                <input type="text" name="bugAuthor" id="bugAuthor" placeholder="Enter your Name" required>
+
+                <button type="submit" class="newIssueButton">Submit</button>
+            </form>
+        </div>
+    </div>
+    <div class="modal3" id="filterModal3">
+        <div class="modal-content3">
+            <span class="close3" id="closeFilterModal3">&times;</span>
+            <h1 class="modalMainHeading3">Filter based on</h1>
+            <!-- Filter options go here -->
+            <form id="filterForm" action="/projects/<%= projectId %>/filter" method="post">
+                <input type="text" name="projectId" id="projectId" value="<%= projectId %>" hidden>
+                <div class="form-group">
+                    <label for="bugOption">Select Filter Options</label>
+                    <select multiple size="10" name="bugOption" id="bugOption">
+                        <option value="FunctionalBugs">Functional Bugs</option>
+                        <option value="UIBugs">UI Bugs</option>
+                        <option value="BrowserCompatibilityBugs">Browser Compatibility Bugs</option>
+                        <option value="MobileResponsivenessBugs">Mobile Responsiveness Bugs</option>
+                        <option value="PerformanceIssues">Performance Issues</option>
+                        <option value="AccessibilityBugs">Accessibility Bugs</option>
+                        <option value="DataInputOutputErrors">Data Input/Output Errors</option>
+                        <option value="LoginAuthenticationIssues">Login/Authentication Issues</option>
+                        <option value="ErrorHandlingBugs">Error Handling Bugs</option>
+                        <option value="DocumentationDiscrepancies">Documentation Discrepancies</option>
+                    </select>
+                </div>
+                <button type="submit" class="apply-button">Apply Filter</button>
+            </form>
+        </div>
+    </div>
+
+</section>
