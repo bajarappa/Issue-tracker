@@ -6,16 +6,16 @@ import mongoose from "mongoose";
 // Exporting the ProjectRepository class
 export default class ProjectRepository {
   // Repository method for adding a new project
-  async addNewProjectRepository(project) {
+  async addNewIssueRepository(issue) {
     try {
       // Creating a new ProjectModel instance and saving it to the database
-      const newProject = new ProjectModel(project);
-      await newProject.save();
-      return newProject;
+      const newIssue = new ProjectModel(issue);
+      await newIssue.save();
+      return newIssue;
     } catch (err) {
       // Handling and logging any errors that occur
-      console.error("Error adding new project:", err);
-      throw new Error("Failed to add new project");
+      console.log(err);
+      throw new Error(err);
     }
   }
 
@@ -24,17 +24,11 @@ export default class ProjectRepository {
     try {
       // Retrieving all projects from the database
       const allProjects = await ProjectModel.find();
-
-      // Logging when no projects are found
-      if (allProjects.length === 0) {
-        console.log("No projects found.");
-      }
-
       return allProjects;
     } catch (err) {
       // Handling and logging any errors that occur
-      console.error("Error retrieving projects:", err);
-      throw new Error("Failed to retrieve projects");
+      console.log(err);
+      throw new Error(err);
     }
   }
 
@@ -46,30 +40,22 @@ export default class ProjectRepository {
 
       // Retrieving a project from the database by its ID
       const project = await ProjectModel.findById(newId);
-
-      // Handling case when the project doesn't exist
-      if (!project) {
-        console.log(`No project found with ID ${id}`);
-        throw new Error("Project not found");
-      }
-
       return project;
     } catch (err) {
       // Handling and logging any errors that occur
-      console.error("Error retrieving project by ID:", err);
-      throw new Error("Failed to retrieve project by ID");
+      console.log(err);
+      throw new Error(err);
     }
   }
 
   // Repository method for deleting a project by its ID
-  async deleteProjectRepo(id) {
+  async deletProjectRepo(id) {
     try {
       // Deleting a project from the database by its ID
       const deletedProject = await ProjectModel.findByIdAndDelete(id);
 
       // Handling the case when the project doesn't exist
       if (!deletedProject) {
-        console.log(`No project found with ID ${id}`);
         throw new Error("Project not found");
       }
 
@@ -78,8 +64,8 @@ export default class ProjectRepository {
       return deletedProject;
     } catch (err) {
       // Handling and logging any errors that occur
-      console.error("Error deleting project:", err);
-      throw new Error("Failed to delete project");
+      console.log(err);
+      throw new Error(err);
     }
   }
 }
