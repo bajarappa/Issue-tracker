@@ -4,9 +4,10 @@
     <!-- Meta tags for character set and viewport settings -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
 
     <!-- Title of the page -->
-    <title>Issue tracker</title>
+    <title>Issue Tracker</title>
 
     <!-- Linking stylesheets for styling -->
     <link rel="stylesheet" href="/styles/layout.css" />
@@ -15,22 +16,28 @@
   </head>
 
   <body>
-    <!-- Header section -->
+    <!-- Header section with navigation -->
     <nav>
       <!-- Logo and home link -->
-      <div class="logo"><a href="/">Issue Tracker</a></div>
+      <div class="logo">
+        <a href="/" aria-label="Go to homepage">Issue Tracker</a>
+      </div>
 
       <!-- Navigation buttons or options -->
       <div class="rightNav">
-        <button id="newProjectBtn">New Project</button>
+        <button id="newProjectBtn" aria-label="Create new project">
+          New Project
+        </button>
       </div>
     </nav>
 
     <!-- Modal for creating a new project -->
-    <div class="modal" id="newProjectModal">
+    <div class="modal" id="newProjectModal" aria-hidden="true">
       <div class="modal-content">
         <!-- Close button for the modal -->
-        <span class="close" id="closeModal">&times;</span>
+        <button class="close" id="closeModal" aria-label="Close modal">
+          &times;
+        </button>
 
         <!-- Heading for the modal -->
         <h1 class="modelMainHeading">Create New Project</h1>
@@ -44,6 +51,7 @@
             id="name"
             placeholder="Project Name"
             required
+            aria-required="true"
           />
 
           <label for="description">Enter Description</label>
@@ -54,6 +62,7 @@
             rows="5"
             placeholder="Enter Description Here"
             required
+            aria-required="true"
           ></textarea>
 
           <label for="author">Author Name</label>
@@ -63,10 +72,17 @@
             id="author"
             placeholder="Enter Author Name"
             required
+            aria-required="true"
           />
 
           <!-- Submit button for the form -->
-          <button type="submit" class="newProjectButton">Submit</button>
+          <button
+            type="submit"
+            class="newProjectButton"
+            aria-label="Submit new project"
+          >
+            Submit
+          </button>
         </form>
       </div>
     </div>
@@ -75,6 +91,7 @@
     <%- body %>
 
     <!-- Footer section -->
+    <!-- Footer content can be added here if needed -->
 
     <!-- Script tag for potential JavaScript functionality -->
     <!-- <script src="/scripts/newIssue.modal.js"></script> -->

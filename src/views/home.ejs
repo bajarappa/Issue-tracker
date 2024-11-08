@@ -1,28 +1,25 @@
 <script src="/scripts/Layout.modal.js"></script>
-<section class="">
+<section>
   <h2 class="issueInProjectHeading">
-    Total Projects <%= allProjects? allProjects.length: 0 %>
+    Total Projects: <%= allProjects ? allProjects.length : 0 %>
   </h2>
 
   <div class="projectBoxes">
-    <% if(allProjects){ %> <% allProjects.map((project) =>{ %>
+    <% if (allProjects && allProjects.length > 0) { %> <%
+    allProjects.forEach((project) => { %>
     <a href="/projects/<%= project.id %>" class="projectBox">
-      <h2 class="projectHeaiding"><%= project.name %></h2>
+      <h2 class="projectHeading"><%= project.name %></h2>
       <p class="descriptionPara">
         <strong>Description:</strong>
         <span class="issueDetail"><%= project.description %></span>
       </p>
       <div class="bottomProjectBox">
-        <p>
-          Author: <strong><%= project.author %></strong
-          ><span id="authorName"></span>
-        </p>
-        <time
-          >Posted:
-          <strong id="postTimeIssue"><%= project.postTime %></strong></time
-        >
+        <p>Author: <strong><%= project.author %></strong></p>
+        <time> Posted: <strong><%= project.postTime %></strong> </time>
       </div>
     </a>
-    <% }) %> <% } %>
+    <% }) %> <% } else { %>
+    <p>No projects found.</p>
+    <% } %>
   </div>
 </section>
