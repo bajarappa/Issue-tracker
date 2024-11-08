@@ -5,9 +5,9 @@
     <div class="projectDiv">
       <div class="issueProjectBoxHeading">
         <h2 class="projectHeaiding"><%= project.name%></h2>
-        <h2 class="issueCounterHedading">
-          No of issues: <span> <%= issues?issues.length:0 %> </span>
-        </h2>
+        <a href="/projects/delete/<%= projectId %>" id="deletProjectButton"
+          >Delete Project</a
+        >
       </div>
       <p><%= project.description %></p>
       <div class="bottomProjectBox">
@@ -26,14 +26,10 @@
       <div class="topIssueButtonArea">
         <div class="topIssueButtonAreaTop">
           <!-- <h2>iSsues in the Project</h2> -->
-          <button id="newIssueBtn">New Issue</button>
-          <a href="/projects/delete/<%= projectId %>" id="deletProjectButton"
-            >Delete Project</a
-          >
-          <a href="/projects/<%= projectId %>" id="clearAllFilter"
-            >Clear all filter</a
-          >
-          <button id="filterBtn">Filter</button>
+          <h2 class="issueCounterHedading">
+            No of issues: <span> <%= issues?issues.length:0 %> </span>
+          </h2>
+          <button id="newIssueBtn">Create new issue</button>
         </div>
         <div class="topIssueButtonAreaBottom">
           <form
@@ -56,6 +52,11 @@
             />
             <button type="submit">Search</button>
           </form>
+
+          <a href="/projects/<%= projectId %>" id="clearAllFilter"
+            >Clear all filter</a
+          >
+          <button id="filterBtn">Filter</button>
         </div>
       </div>
       <div class="issueLists">

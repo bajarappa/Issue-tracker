@@ -1,9 +1,10 @@
 section {
   background-color: #161b22;
   /* background-color: #161b22; */
-  padding: 2vh 10vw;
+  /* padding: 2vh 10vw; */
   color: #ffffff;
   min-height: calc(100vh - 70px);
+  padding-top: 20px;
 }
 
 .issueInProjectHeading {
